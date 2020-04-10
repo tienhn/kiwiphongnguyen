@@ -5,21 +5,15 @@
     </head>
 
     <style type="text/css">
-    @keyframes color {
-      from {color: blue;}
-      to {color: pink;}
-    }
-
+    
+      @keyframes color {
+        from {color: blue;}
+        to {color: pink;}
+      }
 
       body {   
         overflow: hidden;    
-        background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(0, 234, 255) 100%);
-        background: linear-gradient(0deg, rgb(255, 0, 48) 0%, black 100%);
         background: linear-gradient(0deg, rgb(135, 180, 112) 0%, #6f6363 100%);
-        /* background: radial-gradient(rgb(68, 57, 42) 0%, rgba(80, 84, 236, 0.7) 100%); */
-        /* background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(255, 153, 0) 100%); */
-        /* background: grey; */
-        /* background: url("fill.jpg"); */
         width: 100vw;
         height: 100vh;
       }
@@ -31,10 +25,6 @@
         left: 0px;
         top: 0px;
         z-index: 10;
-        /* background-image: url(beads-whole-small.png);
-        background-size: 100% auto;
-        background-position: -50px 100px;
-        background-repeat: no-repeat; */
       }
 
       .eventHandler .beads {
@@ -62,9 +52,6 @@
         right: 0px;
         bottom: 0px;
         display: grid;
-        /* background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(0, 234, 255) 100%); */
-        /* background: linear-gradient(0deg, red 0%, goldenrod 100%);
-        background: green; */
         grid-template-columns: 1fr 1fr;
       }
       .container .left {
@@ -72,13 +59,7 @@
         height: 100vh;
         width: 100%;
       }
-      /* .container .left:hover img.overlay {
-        width: 100%;
-        opacity: 1;
-      } */
-      .container .left:hover img.necklace {
-        /* opacity: 0; */
-      }
+      
       .container .left img.overlay{
         width: 50vw;
         height: 100%;
@@ -89,31 +70,87 @@
         opacity: 0;
       }
 
-      img.parts{
-        width: 100%;
-        height: auto;
-        transition: all 1s ease;
-        /* position: absolute;
-        z-index: 2;
-        width: 12%;
-        height: auto;
-        transition: all 0.6s ease, opacity 0ms;
-        opacity: 0;
-        background: radial-gradient(transparent, transparent);
-        filter: blur(0px); */
-        /* padding: 60px; */
-      }
       figure.parts-container{
         position: absolute;
         z-index: 2;
         width: 12%;
         height: auto;
+        -webkit-transition: all 1s ease, opacity 0ms;
+        -moz-transition: all 1s ease, opacity 0ms;
         transition: all 1s ease, opacity 0ms;
         opacity: 0;
         filter: blur(0px);
         padding: 80px;
         margin: 0px;
       }
+
+      figure.parts-container#circle {
+        top: 42.5%;
+        left: 17%;
+      }
+
+      figure.parts-container#clip {
+        top: 30%;
+        left: 15.5%;
+      }
+
+      figure.parts-container#ring {
+        top: 16%;
+        left: 14.5%;
+      }
+
+      figure.parts-container#three-chain {
+        top: 16%;
+        left: 19%;
+      }
+
+      figure.parts-container#globe {
+        top: 65.5%;
+        left: 17.5%;
+      }
+
+      figure.parts-container.spread{
+        opacity: 1;
+      }
+
+      figure.parts-container.spread#circle {
+        top: 75%;
+        left: 80%;
+        transform: rotate(10deg);
+      }
+
+      figure.parts-container.spread#clip {
+        top: 15%;
+        left: 44%;
+        transform: rotate(80deg);
+      }
+
+      figure.parts-container.spread#three-chain {
+        top: 14%;
+        left: 40%;
+        transform: rotate(-80deg);
+      }
+
+      figure.parts-container.spread#ring {
+        top: 55%;
+        left: 20%;
+        transform: rotate(-20deg);
+      }
+
+      figure.parts-container.spread#globe {
+        top: 15%;
+        left: 30%;
+        transform: rotate(20deg);
+      }
+
+      figure.parts-container img.parts{
+        width: 100%;
+        height: auto;
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        transition: all 1s ease;
+      }
+
       figure.parts-container .orb{
         width: 100%;
         height: 100%;
@@ -121,71 +158,14 @@
         right: 0;
         top: 0;
         z-index: -1;
-        background: radial-gradient(yellow 0%, transparent 50%);
         opacity: 0;
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
         transition: all 1s ease;
       }
+
       .show {
         opacity: 1;
-      }
-
-      .parts-container#circle {
-        top: 42.5%;
-        left: 17%;
-      }
-
-      .parts-container#clip {
-        top: 30%;
-        left: 15.5%;
-      }
-
-      .parts-container#ring {
-        top: 16%;
-        left: 14.5%;
-      }
-
-      .parts-container#three-chain {
-        top: 16%;
-        left: 19%;
-      }
-
-      .parts-container#globe {
-        top: 65.5%;
-        left: 17.5%;
-      }
-
-      .parts-container.spread{
-        opacity: 1;
-      }
-
-      .parts-container.spread#circle {
-        top: 75%;
-        left: 80%;
-        transform: rotate(10deg);
-      }
-
-      .parts-container.spread#clip {
-        top: 15%;
-        left: 44%;
-        transform: rotate(80deg);
-      }
-
-      .parts-container.spread#three-chain {
-        top: 14%;
-        left: 40%;
-        transform: rotate(-80deg);
-      }
-
-      .parts-container.spread#ring {
-        top: 55%;
-        left: 20%;
-        transform: rotate(-20deg);
-      }
-
-      .parts-container.spread#globe {
-        top: 15%;
-        left: 30%;
-        transform: rotate(20deg);
       }
 
       .container .left .fixed-display {
@@ -193,17 +173,14 @@
         padding-right: 10px;
         width: calc(100% - 30px);
         height: calc(100vh - 40px);
-        /* background-image: url(beads-whole-small.png);
-        background-size: 100% auto;
-        background-position: -50px 100px;
-        background-repeat: no-repeat; */
       }
 
-      .container .left .fixed-display img.mask{
+      .container .left .fixed-display img.mask {
         width: 100%;
         height: 100%;
       }
-      .container .left .fixed-display img.necklace{
+
+      .container .left .fixed-display img.necklace {
         width: auto;
         height: 90%;
         position: absolute;
@@ -212,46 +189,35 @@
         z-index: 3;
         display: none;
       }
-      .container .left .fixed-display img.beads{
-        width: auto;
-        height: 90%;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        z-index: 3;
-      }
-      /* .container .left:hover img.necklace{
-        opacity: 0;
-      } */
-      .container .left .fixed-display img.mask,
+      
+      /* .container .left .fixed-display img.mask,
       .container .right .info-icon {
-        /* filter: saturate(0); */
         transition: all .5s ease;
       }
+      
       .container .left .fixed-display img.mask:hover,
       .container .right .info-icon:hover {
         filter: saturate(1);
-      }
+      } */
 
       .container .right {
         grid-column: 2/3;
         overflow: scroll;
       }
+
       .container .right .info-icon {
         width: 90px;
         height: 90px;
         position: fixed;
         bottom: 30px;
         right: 30px;
-        color: silver;
         color: blue;
-        /* background-image: url(info-icon-green.png);
-        background-size: 100% auto;
-        background-repeat: no-repeat;    */
         font-size: 6em;
         z-index: 3;
       }
-      .container .right .title-page p, .container .right .title-page a  {
+
+      .container .right .title-page p, 
+      .container .right .title-page a  {
         height: auto;
         font-family: "Arial";
         margin-left: 10px;
@@ -281,35 +247,59 @@
       }
 
       .container .right .info-icon:hover {
-        filter: saturate(0);
+        filter: invert(1);
       }
+
       .container .scroll-gallery {
         width: 100%;
+        margin-bottom: 20px;
       }
+
       .container .scroll-gallery figure {
-        margin: 20px;
+        margin: 0px;
+        margin-bottom: 0px;
         margin-left: 10px;
         width: calc(100% - 30px);
-        height: calc(100vh - 40px);
-        max-height: calc(100vh - 40px);
-
+        min-height: calc(100vh - 40px);
       }
-      .container .scroll-gallery img{
+
+      .container .scroll-gallery figure img{
         object-fit: cover;
         width: 100%;
         height: 100%;
         border-radius: 20px;
+        margin-top: 20px;
       }
 
-      .scroll-gallery img.lazy {
+      .container .scroll-gallery figure video{
+        object-fit: cover;
+        width: 100%;
+        border-radius: 20px;
+        margin-top: 20px;
+      }
+
+      .scroll-gallery figure img.lazy {
         opacity: 0;
       }
       
-      .scroll-gallery img {
+      .scroll-gallery figure img {
         -webkit-transition: opacity .5s linear 0.2s;
         -moz-transition: opacity .5s linear 0.2s;
         transition: opacity .5s linear 0.2s;
         opacity: 1;
+      }
+
+      .scroll-gallery figure video.lazy {
+        opacity: 0;
+        height: 0px;
+      }
+      
+      .scroll-gallery figure video {
+        -webkit-transition: opacity .5s linear 0.2s;
+        -moz-transition: opacity .5s linear 0.2s;
+        transition: opacity .5s linear 0.2s;
+        opacity: 1;
+        height: 100%;
       }
 
     </style>
@@ -423,35 +413,75 @@
         //   });
         // });
 
-        for (i = 1; i < 20; i++) {
+        for (i = 1; i < 7; i++) {
           var imgString = "gallery-images/KPN_Image-" + i +".jpg";
-          $('.scroll-gallery').prepend('<figure><img class="lazy" data-src="fill.jpg" data-lazy-src='+ imgString +' /></figure>');          
+          var videoString = "gallery-videos/KPN_Video-" + i +".mp4";
+          console.log(videoString)
+          $('.scroll-gallery').prepend(
+            '<figure class="scroll">\
+              <img class="lazy" data-src="fill.jpg" data-lazy-src='+ imgString +' />\
+              <video class="lazy" autoplay muted loop playsinline>\
+                <source src='+ videoString +' type="video/mp4">\
+              </video>\
+              </figure>'
+          );          
         }
 
         let right = document.querySelector(".right");
         //$(document).ajaxStop(function(){
           document.addEventListener("DOMContentLoaded", function() {
           var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+          var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+          var figures = [].slice.call(document.querySelectorAll("figure.scroll"));
 
           if ("IntersectionObserver" in window) {
             let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
               entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
-                  let lazyImage = entry.target;
+                  let lazyImage = entry.target.querySelector('img.lazy')
+                  let lazyVideo = entry.target.querySelector('video');
+                  //let lazySource = lazyVideo.querySelectorAll('source');
                   lazyImage.src = lazyImage.dataset.lazySrc;
-                  var imageError = lazyImage.onError;
                   lazyImage.onerror = function () {
                     this.parentNode.remove();
                   };
+                  $('video source').on('error', function() {
+                    this.parentNode.remove();
+                  });                
                   lazyImage.classList.remove("lazy");
+                  lazyVideo.classList.remove("lazy");
                   lazyImageObserver.unobserve(lazyImage);
                 }
               });
             });
-          
-            lazyImages.forEach(function(lazyImage) {
+
+            figures.forEach(function(lazyImage) {
               lazyImageObserver.observe(lazyImage);
             });
+
+          // if ("IntersectionObserver" in window) {
+          //   let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+          //     entries.forEach(function(entry) {
+          //       if (entry.isIntersecting) {
+          //         let lazyImage = entry.target;
+          //         // let lazyVideo = entry.target;
+          //         lazyImage.src = lazyImage.dataset.lazySrc;
+          //         var imageError = lazyImage.onError;
+          //         console.log(lazyImage)
+          //         lazyImage.onerror = function () {
+          //           this.parentNode.remove();
+          //         };
+          //         lazyImage.classList.remove("lazy");
+          //         lazyImageObserver.unobserve(lazyImage);
+          //       }
+          //     });
+          //   });
+          
+            // lazyImages.forEach(function(lazyImage) {
+            //   lazyImageObserver.observe(lazyImage);
+            // });
+            
+
           } else {
             // Possibly fall back to a more compatible method here
           }
