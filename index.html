@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    </head>
+
+    <style type="text/css">
+    @keyframes color {
+      from {color: blue;}
+      to {color: pink;}
+    }
+
+
+      body {   
+        overflow: hidden;    
+        background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(0, 234, 255) 100%);
+        background: linear-gradient(0deg, rgb(255, 0, 48) 0%, black 100%);
+        background: linear-gradient(0deg, rgb(135, 180, 112) 0%, #6f6363 100%);
+        /* background: radial-gradient(rgb(68, 57, 42) 0%, rgba(80, 84, 236, 0.7) 100%); */
+        /* background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(255, 153, 0) 100%); */
+        /* background: grey; */
+        /* background: url("fill.jpg"); */
+        height: 100vh;
+      }
+
+      .eventHandler {
+        position: absolute;
+        width: 50vw;
+        height: 100vh;
+        left: 0px;
+        top: 0px;
+        z-index: 10;
+      }
+
+      .eventHandler img {
+        width: calc(100% - 30px);
+        height: calc(100% - 40px);
+        margin: 20px;
+        opacity: 0;
+      }
+
+      .container {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        display: grid;
+        /* background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(0, 234, 255) 100%); */
+        /* background: linear-gradient(0deg, red 0%, goldenrod 100%);
+        background: green; */
+        grid-template-columns: 1fr 1fr;
+      }
+      .container .left {
+        grid-column: 1/2;
+        height: 100vh;
+        width: 100%;
+      }
+      /* .container .left:hover img.overlay {
+        width: 100%;
+        opacity: 1;
+      } */
+      .container .left:hover img.necklace {
+        /* opacity: 0; */
+      }
+      .container .left img.overlay{
+        width: 50vw;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 3;
+        opacity: 0;
+      }
+
+      img.parts{
+        width: 100%;
+        height: auto;
+        transition: all 1s ease;
+        /* position: absolute;
+        z-index: 2;
+        width: 12%;
+        height: auto;
+        transition: all 0.6s ease, opacity 0ms;
+        opacity: 0;
+        background: radial-gradient(transparent, transparent);
+        filter: blur(0px); */
+        /* padding: 60px; */
+      }
+      figure.parts-container{
+        position: absolute;
+        z-index: 2;
+        width: 12%;
+        height: auto;
+        transition: all 1s ease, opacity 0ms;
+        opacity: 0;
+        filter: blur(0px);
+        padding: 80px;
+        margin: 0px;
+      }
+      figure.parts-container .orb{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+        background: radial-gradient(yellow 0%, transparent 50%);
+        opacity: 0;
+        transition: all 1s ease;
+      }
+      .show {
+        opacity: 1;
+      }
+
+      .parts-container#circle {
+        top: 42.5%;
+        left: 17%;
+      }
+
+      .parts-container#clip {
+        top: 30%;
+        left: 15.5%;
+      }
+
+      .parts-container#ring {
+        top: 16%;
+        left: 14.5%;
+      }
+
+      .parts-container#three-chain {
+        top: 16%;
+        left: 19%;
+      }
+
+      .parts-container#globe {
+        top: 65.5%;
+        left: 17.5%;
+      }
+
+      .parts-container.spread{
+        opacity: 1;
+      }
+
+      .parts-container.spread#circle {
+        top: 75%;
+        left: 80%;
+        transform: rotate(10deg);
+      }
+
+      .parts-container.spread#clip {
+        top: 15%;
+        left: 44%;
+        transform: rotate(80deg);
+      }
+
+      .parts-container.spread#three-chain {
+        top: 14%;
+        left: 40%;
+        transform: rotate(-80deg);
+      }
+
+      .parts-container.spread#ring {
+        top: 55%;
+        left: 20%;
+        transform: rotate(-20deg);
+      }
+
+      .parts-container.spread#globe {
+        top: 15%;
+        left: 30%;
+        transform: rotate(20deg);
+      }
+
+      .container .left .fixed-display {
+        margin: 20px;
+        margin-right: 10px;
+        width: calc(100% - 30px);
+        height: calc(100vh - 40px);
+        /* background-image: url(mask.png);
+        background-size: 100% auto;
+        background-repeat: no-repeat; */
+      }
+      .container .left .fixed-display img.mask{
+        width: 100%;
+        height: 100%;
+      }
+      .container .left .fixed-display img.necklace{
+        width: auto;
+        height: 90%;
+        position: absolute;
+        top: -20px;
+        left: 15%;
+        z-index: 3;
+        display: none;
+      }
+      .container .left .fixed-display img.beads{
+        width: auto;
+        height: 90%;
+        position: absolute;
+        bottom: -100px;
+        left: 0px;
+        z-index: 3;
+      }
+      /* .container .left:hover img.necklace{
+        opacity: 0;
+      } */
+      .container .left .fixed-display img.mask,
+      .container .right .info-icon {
+        /* filter: saturate(0); */
+        transition: all .5s ease;
+      }
+      .container .left .fixed-display img.mask:hover,
+      .container .right .info-icon:hover {
+        filter: saturate(1);
+      }
+
+      .container .right {
+        grid-column: 2/3;
+        overflow: scroll;
+      }
+      .container .right .info-icon {
+        width: 90px;
+        height: 90px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-image: url(info-icon-green.png);
+        background-size: 100% auto;
+        background-repeat: no-repeat;   
+      }
+      .container .right .title-page {
+        height: auto;
+        width: 100%;
+        font-family: "Arial";
+        /* margin-top: 2.25vw;
+        margin-left: 1.25vw; */
+        /* font-size: 13vw;
+        line-height: 10vw; */
+        margin-left: 10px;
+        margin-top: 100px;
+        color: blue;
+        animation-name: color;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        /* text-align: center; */
+        font-size: 4.3vw;
+        line-height: 1em;
+        text-transform: uppercase;
+        /* background: url("title-outline-green-05.png");
+        background-size: 90% auto;
+        background-repeat: no-repeat;
+        background-position: 0px 20px; */
+      }
+
+      .container .right .info-icon:hover {
+        filter: saturate(0);
+      }
+      .container .scroll-gallery {
+        width: 100%;
+      }
+      .container .scroll-gallery figure {
+        margin: 20px;
+        margin-left: 10px;
+        width: calc(100% - 30px);
+        height: calc(100vh - 40px);
+        max-height: calc(100vh - 40px);
+
+      }
+      .container .scroll-gallery img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+      }
+
+      /* .scroll-gallery img[data-lazy-src] {
+         opacity: 0;
+         border: 1px solid red;
+         -webkit-transition: opacity .5s linear 0.2s;
+        -moz-transition: opacity .5s linear 0.2s;
+        transition: opacity .5s linear 0.2s;
+      }
+      .scroll-gallery img[src] {
+         opacity: 1;
+      } */
+      /* Image with 'data' attribute is hidden */
+      
+      .scroll-gallery img[src].lazy {
+        opacity: 0;
+         /* opacity: 0; */
+      }
+      
+      .scroll-gallery img {
+         -webkit-transition: opacity .5s linear 0.2s;
+             -moz-transition: opacity .5s linear 0.2s;
+                       transition: opacity .5s linear 0.2s;
+         opacity: 1;
+         /* border: 1px solid blue; */
+
+      }
+
+    </style>
+    <body>
+      <figure id="one-chain" class="parts-container"><div class="orb"></div><img class="parts" src="1-CHAIN.png"/></figure>
+      <figure id="one-chain" class="parts-container"><div class="orb"></div><img class="parts" src="1-CHAIN.png"/></figure>
+      <figure id="one-chain" class="parts-container"><div class="orb"></div><img class="parts" src="1-CHAIN.png"/></figure>
+      <figure id="one-chain" class="parts-container"><div class="orb"></div><img class="parts" src="1-CHAIN.png"/></figure>
+      <figure id="one-chain" class="parts-container"><div class="orb"></div><img class="parts" src="1-CHAIN.png"/></figure>
+      <figure id="three-chain" class="parts-container"><div class="orb"></div><img class="parts" src="3-CHAIN.png"/></figure>
+      <figure id="three-chain" class="parts-container"><div class="orb"></div><img class="parts" src="3-CHAIN.png"/></figure>
+      <figure id="circle" class="parts-container"><div class="orb"></div><img class="parts" src="CIRCLE.png"/></figure>
+      <figure id="globe" class="parts-container"><div class="orb"></div><img class="parts" src="GLOBE.png"/></figure>
+      <figure id="clip" class="parts-container"><div class="orb"></div><img class="parts" src="CLIP.png"/></figure>
+      <figure id="ring" class="parts-container"><div class="orb"></div><img class="parts" src="RING.png"/></figure>
+      <div class="eventHandler">
+        <img class="mask" id="mask-overlay" src="mask-grey-flat.png"/>
+      </div>
+      <div class="container">
+        <div class="left">
+          <div class="fixed-display">
+            <img class="necklace" src="necklace-whole.png"/>
+            <img class="beads" src="beads-whole.png"/>
+            <img class="mask" src="mask-grey-flat.png"/>
+          </div>
+        </div>
+        <div class="right">
+          <div class="info-icon"></div>
+          <div class="title-page">
+            ✿<br/>⊛❣⊛<br/>
+            ✿Kiwi<br/>Ph⊛ng❣<br/>Nguyen✿
+            <br/>⊛⊛<br/> DM @ f✿r inquiries
+          </div>
+          <div class="scroll-gallery"></div>
+        </div>
+      </div>
+      <script>
+
+        // $( document ).ready(function() {
+        //   spread(100)
+        // });
+
+        $( ".eventHandler" ).mouseenter(function() {
+          spread(100)
+        });
+
+        function spread(max){
+          $('.parts-container').addClass("spread");
+          $('#mask-overlay').css("opacity", 1);
+          $('.necklace').css("opacity", 0);
+          setTimeout(function(){
+            $('.parts-container').css("opacity", 1);
+          }, 10);
+          var offset = $('.scroll-gallery').offset();
+          // $('.container').prepend('<img class="parts" src="1-CHAIN.png"/>')
+          $('.spread').each(function( i ) {
+            var randomleft = Math.floor(Math.random() * Math.floor(max)) - 10;
+            var randomtop = Math.floor(Math.random() * Math.floor(90)) - 20;
+            var randomblur = Math.floor(Math.random() * Math.floor(2));
+            this.style.left = randomleft + "%";
+            this.style.top = randomtop + "%";
+            this.style.transform = 'rotate(' + randomtop + 'deg)';
+            this.style.filter = 'blur(0px)';
+            this.querySelector('.orb').style.filter = 'hue-rotate(' + randomtop + 'deg)';
+            if (randomleft < 35 && randomtop < 50){
+              // this.style.padding = Math.floor(Math.random() * Math.floor(150));
+              //this.style.filter = 'blur('+ randomblur +'px)';
+              this.querySelector('.orb').style.opacity = randomblur
+              this.querySelector('img').style.opacity = !randomblur
+              this.querySelector('.orb').style.background = 'radial-gradient( transparent 0%, #00eaff4d 20%, transparent 50%)';
+              //this.querySelector('.orb').style.filter = 'invert('+(randomtop / 10)+')';
+            } if (randomleft < 35 && randomtop > 50){
+              this.style.filter = 'blur('+ randomblur +'px)';
+              this.querySelector('img').style.opacity = randomblur
+
+              //this.querySelector('.orb').style.filter = 'invert(0.2)';
+            } if (randomleft > 35 && offset.top < 400){
+              this.querySelector('.orb').style.opacity = "0"
+            }
+
+          });
+          
+        }
+        $( ".eventHandler" ).mouseleave(function() {
+          spread(40)
+        });
+
+        $( ".info-icon" ).click(function() {
+          $('.parts').removeClass("spread");
+          $('.parts').css("opacity", 0);
+          $('.necklace').css("opacity", 1);
+          $('#mask-overlay').css("opacity", 0);
+          $( ".right" ).scrollTop( 0 );
+        });
+
+        var spreadsheetID = "1VsXcyjdPIgiqGxmav6it9lM039oYy0L1YiHpB2haxb8";
+        var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json"; //this is the part that's changed
+
+        $.getJSON(url, function(data) {
+          console.log(data)
+          var entry = data.feed.entry;
+          $(entry).each(function(){
+            $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
+            spread(100)
+          });
+        });
+
+        let right = document.querySelector(".right");
+        $(document).ajaxStop(function(){
+          var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+          if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  let lazyImage = entry.target;
+                  console.log(lazyImage.dataset.src, lazyImage.dataset.srcset)
+                  lazyImage.src = lazyImage.dataset.src;
+                  //lazyImage.srcset = lazyImage.dataset.srcset;
+                  // setTimeout(function() {
+                     lazyImage.classList.remove("lazy");
+                  // }, 100);
+                  lazyImageObserver.unobserve(lazyImage);
+                }
+              });
+            });
+          
+            lazyImages.forEach(function(lazyImage) {
+              lazyImageObserver.observe(lazyImage);
+            });
+          } else {
+            // Possibly fall back to a more compatible method here
+          }
+        });
+        
+      //   $(document).ajaxStop(function(){
+      //     let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+      //     let active = false;
+          
+      //     const lazyLoad = function() {
+      //       if (active === false) {
+      //         active = true;
+      //         console.log("lazyLoad>>>>>")
+
+      //         setTimeout(function() {
+      //           lazyImages.forEach(function(lazyImage) {
+      //             if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+      //               lazyImage.src = lazyImage.dataset.src;
+      //               lazyImage.srcset = lazyImage.dataset.srcset;
+      //               lazyImage.classList.remove("lazy");
+      //               console.log(lazyImage.src, lazyImage.srcset)
+      //               lazyImages = lazyImages.filter(function(image) {
+      //                 return image !== lazyImage;
+      //               });
+                  
+      //               if (lazyImages.length === 0) {
+      //                 right.removeEventListener("scroll", lazyLoad);
+      //                 window.removeEventListener("resize", lazyLoad);
+      //                 window.removeEventListener("orientationchange", lazyLoad);
+      //               }
+      //             }
+      //           });
+              
+      //           active = false;
+      //         }, 200);
+      //       }
+      //     };
+      
+      //     right.addEventListener("scroll", lazyLoad);
+      //     window.addEventListener("resize", lazyLoad);
+      //     window.addEventListener("orientationchange", lazyLoad);
+      // });
+
+      </script>
+  </body>
+</html>

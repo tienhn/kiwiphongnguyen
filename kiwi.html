@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    </head>
+
+    <style type="text/css">
+      body {
+        background: blue;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+      }
+      .circle {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background: url("grid.png");
+        background-size: 700px 700px;
+      }
+
+    </style>
+    <body>
+      <div class="container">
+
+      </div>
+    <script type="text/javascript">
+      document.onmousemove = animateCircles;
+      document.onclick = switchState;
+      var state = false;
+
+      function switchState(){
+        console.log(state)
+
+        state = !state;
+
+        if ( state === true ){
+          console.log(state)
+          document.onmousemove = null;
+        } else {
+          document.onmousemove = animateCircles;
+        }
+      }
+
+      const times = x => f => {
+        if (x > 0) {
+          f()
+          times (x - 1) (f)
+        }
+      }
+
+      function animateCircles(event){
+        //console.log(switchState())
+        var circle = document.createElement("div");
+        circle.setAttribute("class", "circle");
+        times (Math.round(Math.random() * 5)) (() => {
+          //console.log("heloo"),
+          document.body.appendChild(circle)
+        })
+
+        
+        circle.style.left = event.clientX + 'px';
+        circle.style.top = event.clientY + 'px';
+        var random = Math.round(Math.random() * 7)
+        var randomHue = Math.round(Math.random() * 360)
+        circle.style.filter = "hue-rotate("+ randomHue +"deg)";
+        circle.style.backgroundPosition = (random * 100) + 'px'; 
+      }
+    
+    </script>
+
+  </body>
+</html>

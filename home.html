@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    </head>
+
+    <style type="text/css">
+      /* body { */
+        /* background: lightblue; */
+        /* position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px; */
+      /* } */
+      /* .container {
+        display: grid;
+        grid-template-columns: .25fr 1fr .25fr 1fr .25fr 1fr .25fr;
+        grid-auto-rows: auto;
+        grid-auto-flow: row;
+        overflow-x: hidden;
+      } */
+      body {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: lime;    
+        overflow: hidden;    
+      }
+      .container, .box {
+        /* transition: background .2s ease; */
+      }
+      .container {
+        position: absolute;
+        background: url(blank.jpg);
+        background-size: auto 100vh;
+        background-repeat: no-repeat ;
+        background-position: 0px 0px;
+        top: -5px;
+        left: calc((100vw - 68vh) / 2);
+        width: 68vh;
+        height: calc(100vh - 30px);
+        border-radius: 25px;
+        /* padding: 40px; */
+        display: grid;
+        /* grid-template-columns: .75fr 1fr 1fr 1fr .5fr 1fr 3fr 1fr .5fr 1fr 1fr 1fr .75fr; */
+        grid-template-columns: .25fr .25fr .4fr 12px .2fr .1fr 1fr 1fr .1fr .2fr 12px .4fr .25fr .25fr;
+        /* grid-template-rows: .5fr .75fr 1fr 1fr .25fr 1fr 1fr .5fr 2fr 1fr .75fr 1fr; */
+        grid-template-rows: repeat(26, 1fr);
+      }
+      .container, .box, .box:after {
+        border: 1.5vh solid lime;
+      }
+      .container .box {
+        border-radius: 25px;
+      }
+      .container .clip {
+        border-radius: 50%;
+        clip-path: polygon(0px 50%, 100% 50%, 100% 118.29%, 0% 100%);
+      }
+      .container .box.a1 {
+        grid-column: 2 / 14;
+        grid-row: 2 / 18;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 0;
+      }
+      .container .box.a1:after {
+        content: "";
+        display: inline-block;
+        height: 54vh;
+        width: 100%;
+        margin-top: 48%;
+        margin-left: -12px;
+        border-radius: 50%;
+        clip-path: polygon(0px 50%, 100% 50%, 100% 118.29%, 0% 100%);
+      }
+      .container .box.a2 {
+        grid-column: 2 / 14;
+        grid-row: 10 / 25;
+      }
+      .container .box.b {
+        grid-column: 3 / 6;
+        grid-row: 3 / 7;
+        border-radius: 16px;
+      }
+      .container .box.c {
+        grid-column: 10 / 13;
+        grid-row: 3 / 7;
+        border-radius: 16px;
+      }
+      .container .box.d {
+        grid-column: 7 / 9;
+        grid-row: 3 / 15;
+        border-radius: 16px;
+        z-index: 6;
+      }
+      .container .box.d:hover {
+        background: url(fill.jpg);
+        background-size: 250% auto;
+        background-position: -100px -100px;
+      }
+      .container .box.loop.top.e1 {
+        grid-column: 3 / 5;
+        grid-row: 8 / 16;
+        border-radius: 16px;
+        border-bottom: 0px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .container .box.loop.top.e2 {
+        grid-column: 11 / 13;
+        grid-row: 8 / 16;
+        border-radius: 16px;
+        border-bottom: 0px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .container .box.loop.bottom.e3 {
+        grid-column: 3 / 13;
+        grid-row: 10 / 24;
+        /* border-radius: 50%; */
+        /* clip-path: polygon(0px 50%, 100% 50%, 100% 118.29%, 0% 100%); */
+        border-top: 0px;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+      }
+      .container .box.loop.bottom.e4 {
+        grid-column: 4 / 12;
+        grid-row: 11 / 22;
+        border-top: 0px;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+      }
+      .container .box.loop.top.f1{
+        grid-column: 7 / 9;
+        grid-row: 16 / 21;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        clip-path: polygon(-4.54% -31px, 105.81% -21.34%, 110.73% 14.85%, -6.71% 14.39%);
+        border-top-right-radius: 20px;  
+    }
+      .container .box.loop.bottom.f2 {
+        grid-column: 7 / 9;
+        grid-row: 13 / 20;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        clip-path: polygon(-5.43% 103px, 104.47% 52.62%, 104.47% 127.3%, -9.84% 129.07%);
+        pointer-events: none;
+      }
+      .container .box.g {
+        grid-column: 2 / 14;
+        grid-row: 2 / 26;
+        z-index: 5;
+        /* border-top-right-radius: 0px;
+        border-top-left-radius: 100%; */
+        /* clip-path: polygon(-5.43% 103px, 105.99% 23.19%, 104.47% 127.3%, -9.84% 129.07%); */
+      }
+      .container .box.g:hover {
+        background: url(fill.jpg);
+        background-size: 250% auto;
+        background-position: -100px -100px;
+      }
+
+      /* .container .box.bottom:hover {
+        background: url(fill.jpg);
+        background-size: 250% auto;
+        background-position: -100px -100px;
+      } */
+
+    </style>
+    <body>
+      <h2>Kiwi Phong Ngueyen</h2>
+      <div class="container">
+        <div class="box a1"></div>
+        <div class="box b"></div>
+        <div class="box c"></div>
+        <div class="box d"></div>
+        <div class="box loop top e1"></div>
+        <div class="box loop top e2"></div>
+        <div class="box loop bottom e3"></div>
+        <div class="box loop bottom e4"></div>
+        <div class="box loop top f1"></div>
+        <div class="box loop bottom f2"></div>
+        <div class="box g"></div>
+      </div>
+      <script>
+        // ID of the Google Spreadsheet
+        // var spreadsheetID = "1VsXcyjdPIgiqGxmav6it9lM039oYy0L1YiHpB2haxb8";
+                      
+        // // Make sure it is public or set to Anyone with link can view 
+        // var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json"; //this is the part that's changed
+
+        // $.getJSON(url, function(data) {
+        //   console.log(data)
+
+        //     var entry = data.feed.entry;
+
+        //     $(entry).each(function(){
+        //       console.log(this.gsx$_cokwr.$t)
+        //     // //make sure this matches your column labels when you change the source sheet
+        //     $('.container').prepend('<div class="bubble"><img src="'+this.gsx$_cokwr.$t+'?raw=1"/></div>');
+
+        //     });
+        // });
+
+        // var token = 'IGQVJYU3JMYVNSVDNpNU9sUzV3NHFiMVZA4bW5HczZA4TTE2YW12LUNZAd05MamE2QlBrMTRiaUxLMllGUWM0dzRVdzJFdmRoU1hMY0hnY3pwWkY4aEg3dGVtRWdHeEM3dUR0ME9LcFNsSU55OHVnZAnR2X0xTdmxlQllUM2NJ',
+        //     username = 'kiwiphongnguyenjewelry', // rudrastyh - my username :)
+        //     num_photos = 4;
+        //     // userid = 17841431892778777; // User ID - get it in source HTML of your Instagram profile or look at the next example :)
+        //     userid = 31830223092;
+        //     $.ajax({
+        //     	url: 'https://api.instagram.com/v1/users/' + userid + '/media/recent', // or /users/self/media/recent for Sandbox
+        //     	dataType: 'jsonp',
+        //     	type: 'GET',
+        //     	data: {access_token: token, count: num_photos},
+        //     	success: function(data){
+        //      		console.log(data);
+        //     		for( x in data.data ){
+        //     			$('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
+        //     			// data.data[x].images.thumbnail.url - URL of image 150х150
+        //     			// data.data[x].images.standard_resolution.url - URL of image 612х612
+        //     			// data.data[x].link - Instagram post URL 
+        //     		}
+        //     	},
+        //     	error: function(data){
+        //     		console.log(data); // send the error notifications to console
+        //     	}
+        //     });
+      </script>
+  </body>
+</html>

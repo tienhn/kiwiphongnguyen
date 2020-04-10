@@ -1,0 +1,29 @@
+https://api.instagram.com/oauth/authorize?client_id=2655164574770388&redirect_uri={redirect-uri}&scope=user_profile,user_media&response_type=code
+
+
+https://api.instagram.com/oauth/authorize
+  ?client_id=2655164574770388
+  &redirect_uri=https://kiwi-nguyen.herokuapp.com/
+  &scope=user_profile,user_media
+  &response_type=code
+
+
+AQDc05I_Q2icsRmvKwlF5bE49VapVDjrGAYVsetYWicu5qBUEUtnEfjEihnr3nNfIchhSWTDzVzWzT_1C3RdVjCbV6vxt6QtUfVEV8koJZZQSv5459E6HR7U--uK_GqZXbnmSYQoY0aXdxiRnUzeLeFoph14SaMqc6dhP8QwEI79_185n40rBOe9BdNcnnmnl1S33Gq5YkL9jMI7dC6rywWwsaXKREtVqqS_9tCkMGxZuA
+
+#_
+
+
+curl -X POST \
+  https://api.instagram.com/oauth/access_token \
+  -F client_id=2655164574770388 \
+  -F client_secret=e34f6d614b8d1ba8fef1db1cc4cbdf19 \
+  -F grant_type=authorization_code \
+  -F redirect_uri=https://kiwi-nguyen.herokuapp.com/ \
+  -F code=AQDc05I_Q2icsRmvKwlF5bE49VapVDjrGAYVsetYWicu5qBUEUtnEfjEihnr3nNfIchhSWTDzVzWzT_1C3RdVjCbV6vxt6QtUfVEV8koJZZQSv5459E6HR7U--uK_GqZXbnmSYQoY0aXdxiRnUzeLeFoph14SaMqc6dhP8QwEI79_185n40rBOe9BdNcnnmnl1S33Gq5YkL9jMI7dC6rywWwsaXKREtVqqS_9tCkMGxZuA
+
+{
+  "access_token": "IGQVJYU3JMYVNSVDNpNU9sUzV3NHFiMVZA4bW5HczZA4TTE2YW12LUNZAd05MamE2QlBrMTRiaUxLMllGUWM0dzRVdzJFdmRoU1hMY0hnY3pwWkY4aEg3dGVtRWdHeEM3dUR0ME9LcFNsSU55OHVnZAnR2X0xTdmxlQllUM2NJ", 
+  "user_id": 17841431892778777
+}
+
+
