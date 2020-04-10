@@ -421,10 +421,10 @@
           console.log(videoString)
           $('.scroll-gallery').prepend(
             '<figure class="scroll">\
-              <img class="lazy" data-src="fill.jpg" data-lazy-src='+ imgString +' />\
               <video class="lazy" autoplay muted loop playsinline>\
                 <source src='+ videoString +' type="video/mp4">\
               </video>\
+              <img class="lazy" data-src="fill.jpg" data-lazy-src='+ imgString +' />\
               </figure>'
           );          
         }
