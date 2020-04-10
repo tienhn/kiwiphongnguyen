@@ -20,6 +20,7 @@
         /* background: linear-gradient(0deg, rgb(255, 0, 48) 0%, rgb(255, 153, 0) 100%); */
         /* background: grey; */
         /* background: url("fill.jpg"); */
+        width: 100vw;
         height: 100vh;
       }
 
@@ -30,13 +31,28 @@
         left: 0px;
         top: 0px;
         z-index: 10;
+        /* background-image: url(beads-whole-small.png);
+        background-size: 100% auto;
+        background-position: -50px 100px;
+        background-repeat: no-repeat; */
+      }
+
+      .eventHandler .beads {
+        background-image: url(beads-whole-small.png);
+        background-size: 100% auto;
+        background-position: -50px 100px;
+        background-repeat: no-repeat;
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        top: 0px;
       }
 
       .eventHandler img {
         width: calc(100% - 30px);
         height: calc(100% - 40px);
         margin: 20px;
-        opacity: 0;
+        opacity: 1;
       }
 
       .container {
@@ -173,14 +189,16 @@
       }
 
       .container .left .fixed-display {
-        margin: 20px;
-        margin-right: 10px;
+        padding: 20px;
+        padding-right: 10px;
         width: calc(100% - 30px);
         height: calc(100vh - 40px);
-        /* background-image: url(mask.png);
+        /* background-image: url(beads-whole-small.png);
         background-size: 100% auto;
+        background-position: -50px 100px;
         background-repeat: no-repeat; */
       }
+
       .container .left .fixed-display img.mask{
         width: 100%;
         height: 100%;
@@ -198,7 +216,7 @@
         width: auto;
         height: 90%;
         position: absolute;
-        bottom: -100px;
+        bottom: 0px;
         left: 0px;
         z-index: 3;
       }
@@ -225,33 +243,36 @@
         position: fixed;
         bottom: 30px;
         right: 30px;
-        background-image: url(info-icon-green.png);
+        color: silver;
+        color: blue;
+        /* background-image: url(info-icon-green.png);
         background-size: 100% auto;
-        background-repeat: no-repeat;   
+        background-repeat: no-repeat;    */
+        font-size: 6em;
+        z-index: 3;
       }
-      .container .right .title-page {
+      .container .right .title-page * {
         height: auto;
-        width: 100%;
         font-family: "Arial";
-        /* margin-top: 2.25vw;
-        margin-left: 1.25vw; */
-        /* font-size: 13vw;
-        line-height: 10vw; */
         margin-left: 10px;
+        margin-bottom: 0px;
         margin-top: 100px;
         color: blue;
         animation-name: color;
         animation-duration: 3s;
         animation-iteration-count: infinite;
         animation-direction: alternate;
-        /* text-align: center; */
         font-size: 4.3vw;
         line-height: 1em;
         text-transform: uppercase;
-        /* background: url("title-outline-green-05.png");
-        background-size: 90% auto;
-        background-repeat: no-repeat;
-        background-position: 0px 20px; */
+      }
+
+      .right .title-page p a {
+        margin-left: 0px!important;
+      }
+
+      .right .title-page p a:hover {
+        filter: invert(1);
       }
 
       .container .right .info-icon:hover {
@@ -275,30 +296,15 @@
         border-radius: 20px;
       }
 
-      /* .scroll-gallery img[data-lazy-src] {
-         opacity: 0;
-         border: 1px solid red;
-         -webkit-transition: opacity .5s linear 0.2s;
-        -moz-transition: opacity .5s linear 0.2s;
-        transition: opacity .5s linear 0.2s;
-      }
-      .scroll-gallery img[src] {
-         opacity: 1;
-      } */
-      /* Image with 'data' attribute is hidden */
-      
-      .scroll-gallery img[src].lazy {
+      .scroll-gallery img.lazy {
         opacity: 0;
-         /* opacity: 0; */
       }
       
       .scroll-gallery img {
-         -webkit-transition: opacity .5s linear 0.2s;
-             -moz-transition: opacity .5s linear 0.2s;
-                       transition: opacity .5s linear 0.2s;
-         opacity: 1;
-         /* border: 1px solid blue; */
-
+        -webkit-transition: opacity .5s linear 0.2s;
+        -moz-transition: opacity .5s linear 0.2s;
+        transition: opacity .5s linear 0.2s;
+        opacity: 1;
       }
 
     </style>
@@ -316,21 +322,24 @@
       <figure id="ring" class="parts-container"><div class="orb"></div><img class="parts" src="RING.png"/></figure>
       <div class="eventHandler">
         <img class="mask" id="mask-overlay" src="mask-grey-flat.png"/>
+        <div class="beads"></div>
       </div>
       <div class="container">
         <div class="left">
           <div class="fixed-display">
             <img class="necklace" src="necklace-whole.png"/>
-            <img class="beads" src="beads-whole.png"/>
+            <!-- <img class="beads" src="beads-whole-small.png"/> -->
             <img class="mask" src="mask-grey-flat.png"/>
           </div>
         </div>
         <div class="right">
-          <div class="info-icon"></div>
+          <div class="info-icon">✿</div>
           <div class="title-page">
+            <p>
             ✿<br/>⊛❣⊛<br/>
             ✿Kiwi<br/>Ph⊛ng❣<br/>Nguyen✿
-            <br/>⊛⊛<br/> DM @ f✿r inquiries
+            <br/>⊛⊛<br/> <a href="https://www.instagram.com/kiwiphongnguyenjewelry/" target="_blank">DM @ f✿r inquiries</a>
+          </p>
           </div>
           <div class="scroll-gallery"></div>
         </div>
@@ -378,11 +387,14 @@
             } if (randomleft > 35 && offset.top < 400){
               this.querySelector('.orb').style.opacity = "0"
             }
-
           });
-          
         }
+
         $( ".eventHandler" ).mouseleave(function() {
+          spread(40)
+        });
+
+        $( ".right" ).mousemove(function() {
           spread(40)
         });
 
@@ -394,24 +406,22 @@
           $( ".right" ).scrollTop( 0 );
         });
 
-        var spreadsheetID = "1VsXcyjdPIgiqGxmav6it9lM039oYy0L1YiHpB2haxb8";
-        var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json"; //this is the part that's changed
+        // var spreadsheetID = "1VsXcyjdPIgiqGxmav6it9lM039oYy0L1YiHpB2haxb8";
+        // var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json"; //this is the part that's changed
 
-        $.getJSON(url, function(data) {
-          console.log(data)
-          var entry = data.feed.entry;
-          $(entry).each(function(){
-            //$('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
-            spread(100)
-          });
-        });
+        // $.getJSON(url, function(data) {
+        //   console.log(data)
+        //   var entry = data.feed.entry;
+        //   $(entry).each(function(){
+        //     $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
+        //     spread(100)
+        //   });
+        // });
 
-        for (i = 1; i < 4; i++) {
-          console.log("KPN_Image-" + i +".jpg");
+        for (i = 1; i < 20; i++) {
           var imgString = "gallery-images/KPN_Image-" + i +".jpg";
-          $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src='+ imgString +' /></figure>');
+          $('.scroll-gallery').prepend('<figure><img class="lazy" data-src="fill.jpg" data-lazy-src='+ imgString +' /></figure>');          
         }
-
 
         let right = document.querySelector(".right");
         //$(document).ajaxStop(function(){
@@ -423,12 +433,12 @@
               entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                   let lazyImage = entry.target;
-                  console.log(lazyImage.dataset.src, lazyImage.dataset.srcset)
                   lazyImage.src = lazyImage.dataset.lazySrc;
-                  //lazyImage.srcset = lazyImage.dataset.srcset;
-                  // setTimeout(function() {
-                     lazyImage.classList.remove("lazy");
-                  // }, 100);
+                  var imageError = lazyImage.onError;
+                  lazyImage.onerror = function () {
+                    this.parentNode.remove();
+                  };
+                  lazyImage.classList.remove("lazy");
                   lazyImageObserver.unobserve(lazyImage);
                 }
               });
@@ -441,44 +451,6 @@
             // Possibly fall back to a more compatible method here
           }
         });
-        
-      //   $(document).ajaxStop(function(){
-      //     let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-      //     let active = false;
-          
-      //     const lazyLoad = function() {
-      //       if (active === false) {
-      //         active = true;
-      //         console.log("lazyLoad>>>>>")
-
-      //         setTimeout(function() {
-      //           lazyImages.forEach(function(lazyImage) {
-      //             if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-      //               lazyImage.src = lazyImage.dataset.src;
-      //               lazyImage.srcset = lazyImage.dataset.srcset;
-      //               lazyImage.classList.remove("lazy");
-      //               console.log(lazyImage.src, lazyImage.srcset)
-      //               lazyImages = lazyImages.filter(function(image) {
-      //                 return image !== lazyImage;
-      //               });
-                  
-      //               if (lazyImages.length === 0) {
-      //                 right.removeEventListener("scroll", lazyLoad);
-      //                 window.removeEventListener("resize", lazyLoad);
-      //                 window.removeEventListener("orientationchange", lazyLoad);
-      //               }
-      //             }
-      //           });
-              
-      //           active = false;
-      //         }, 200);
-      //       }
-      //     };
-      
-      //     right.addEventListener("scroll", lazyLoad);
-      //     window.addEventListener("resize", lazyLoad);
-      //     window.addEventListener("orientationchange", lazyLoad);
-      // });
 
       </script>
   </body>
