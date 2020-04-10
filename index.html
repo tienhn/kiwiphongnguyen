@@ -401,13 +401,21 @@
           console.log(data)
           var entry = data.feed.entry;
           $(entry).each(function(){
-            $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
+            //$('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
             spread(100)
           });
         });
 
+        for (i = 1; i < 4; i++) {
+          console.log("KPN_Image-" + i +".jpg");
+          var imgString = "gallery-images/KPN_Image-" + i +".jpg";
+          $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src='+ imgString +' /></figure>');
+        }
+
+
         let right = document.querySelector(".right");
-        $(document).ajaxStop(function(){
+        //$(document).ajaxStop(function(){
+          document.addEventListener("DOMContentLoaded", function() {
           var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
 
           if ("IntersectionObserver" in window) {
@@ -416,7 +424,7 @@
                 if (entry.isIntersecting) {
                   let lazyImage = entry.target;
                   console.log(lazyImage.dataset.src, lazyImage.dataset.srcset)
-                  lazyImage.src = lazyImage.dataset.src;
+                  lazyImage.src = lazyImage.dataset.lazySrc;
                   //lazyImage.srcset = lazyImage.dataset.srcset;
                   // setTimeout(function() {
                      lazyImage.classList.remove("lazy");
