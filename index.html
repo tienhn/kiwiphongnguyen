@@ -163,6 +163,8 @@
         -webkit-transition: all 1s ease;
         -moz-transition: all 1s ease;
         transition: all 1s ease;
+        filter: hue-rotate(0deg);
+        background: radial-gradient( transparent 0%, #00eaff4d 20%, transparent 50%);
       }
 
       .show {
@@ -190,17 +192,7 @@
         z-index: 3;
         display: none;
       }
-      
-      /* .container .left .fixed-display img.mask,
-      .container .right .info-icon {
-        transition: all .5s ease;
-      }
-      
-      .container .left .fixed-display img.mask:hover,
-      .container .right .info-icon:hover {
-        filter: saturate(1);
-      } */
-
+  
       .container .right {
         grid-column: 2/3;
         overflow: scroll;
@@ -319,14 +311,12 @@
       <figure id="clip" class="parts-container"><div class="orb"></div><img class="parts" src="CLIP.png"/></figure>
       <figure id="ring" class="parts-container"><div class="orb"></div><img class="parts" src="RING.png"/></figure>
       <div class="eventHandler">
-        <img class="mask" id="mask-overlay" src="mask-grey.png"/>
         <div class="beads"></div>
       </div>
       <div class="container">
         <div class="left">
           <div class="fixed-display">
             <img class="necklace" src="necklace-whole.png"/>
-            <!-- <img class="beads" src="beads-whole-small.png"/> -->
             <img class="mask" src="mask-grey.png"/>
           </div>
         </div>
@@ -344,10 +334,6 @@
       </div>
       <script>
 
-        // $( document ).ready(function() {
-        //   spread(100)
-        // });
-
         $( ".eventHandler" ).mouseenter(function() {
           spread(100)
         });
@@ -360,30 +346,25 @@
             $('.parts-container').css("opacity", 1);
           }, 10);
           var offset = $('.scroll-gallery').offset();
-          // $('.container').prepend('<img class="parts" src="1-CHAIN.png"/>')
           $('.spread').each(function( i ) {
             var randomleft = Math.floor(Math.random() * Math.floor(max)) - 10;
             var randomtop = Math.floor(Math.random() * Math.floor(90)) - 20;
             var randomblur = Math.floor(Math.random() * Math.floor(2));
+            var randomopacity = Math.floor(Math.random() * Math.floor(2));
             this.style.left = randomleft + "%";
             this.style.top = randomtop + "%";
             this.style.transform = 'rotate(' + randomtop + 'deg)';
-            this.style.filter = 'blur(0px)';
+            this.style.filter = 'blur('+ randomblur +'px)';
+            this.style.zIndex = 0;
+            this.querySelector('.orb').style.opacity = randomopacity
+            console.log(randomblur)
             this.querySelector('.orb').style.filter = 'hue-rotate(' + randomtop + 'deg)';
             if (randomleft < 35 && randomtop < 50){
-              // this.style.padding = Math.floor(Math.random() * Math.floor(150));
-              //this.style.filter = 'blur('+ randomblur +'px)';
-              this.querySelector('.orb').style.opacity = randomblur
-              this.querySelector('img').style.opacity = !randomblur
-              this.querySelector('.orb').style.background = 'radial-gradient( transparent 0%, #00eaff4d 20%, transparent 50%)';
-              //this.querySelector('.orb').style.filter = 'invert('+(randomtop / 10)+')';
-            } if (randomleft < 35 && randomtop > 50){
-              this.style.filter = 'blur('+ randomblur +'px)';
               this.querySelector('img').style.opacity = randomblur
-
-              //this.querySelector('.orb').style.filter = 'invert(0.2)';
             } if (randomleft > 35 && offset.top < 400){
               this.querySelector('.orb').style.opacity = "0"
+            } if (randomblur == 0){
+              this.style.zIndex = 1;
             }
           });
         }
@@ -404,18 +385,6 @@
           $( ".right" ).scrollTop( 0 );
         });
 
-        // var spreadsheetID = "1VsXcyjdPIgiqGxmav6it9lM039oYy0L1YiHpB2haxb8";
-        // var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/1/public/values?alt=json"; //this is the part that's changed
-
-        // $.getJSON(url, function(data) {
-        //   console.log(data)
-        //   var entry = data.feed.entry;
-        //   $(entry).each(function(){
-        //     $('.scroll-gallery').prepend('<figure><img class="lazy" src="mask.png"  data-src="fill.jpg" data-lazy-src="'+this.gsx$_cokwr.$t+'?raw=1" /></figure>');
-        //     spread(100)
-        //   });
-        // });
-
         for (i = 1; i < 7; i++) {
           var imgString = "gallery-images/KPN_Image-" + i +".jpg";
           var videoString = "gallery-videos/KPN_Video-" + i +".mp4";
@@ -431,8 +400,7 @@
         }
 
         let right = document.querySelector(".right");
-        //$(document).ajaxStop(function(){
-          document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
           var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
           var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
           var figures = [].slice.call(document.querySelectorAll("figure.scroll"));
@@ -443,7 +411,6 @@
                 if (entry.isIntersecting) {
                   let lazyImage = entry.target.querySelector('img.lazy')
                   let lazyVideo = entry.target.querySelector('video');
-                  //let lazySource = lazyVideo.querySelectorAll('source');
                   lazyImage.src = lazyImage.dataset.lazySrc;
                   lazyImage.onerror = function () {
                     this.parentNode.remove();
@@ -461,32 +428,6 @@
             figures.forEach(function(lazyImage) {
               lazyImageObserver.observe(lazyImage);
             });
-
-          // if ("IntersectionObserver" in window) {
-          //   let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-          //     entries.forEach(function(entry) {
-          //       if (entry.isIntersecting) {
-          //         let lazyImage = entry.target;
-          //         // let lazyVideo = entry.target;
-          //         lazyImage.src = lazyImage.dataset.lazySrc;
-          //         var imageError = lazyImage.onError;
-          //         console.log(lazyImage)
-          //         lazyImage.onerror = function () {
-          //           this.parentNode.remove();
-          //         };
-          //         lazyImage.classList.remove("lazy");
-          //         lazyImageObserver.unobserve(lazyImage);
-          //       }
-          //     });
-          //   });
-          
-            // lazyImages.forEach(function(lazyImage) {
-            //   lazyImageObserver.observe(lazyImage);
-            // });
-            
-
-          } else {
-            // Possibly fall back to a more compatible method here
           }
         });
 
