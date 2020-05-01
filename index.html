@@ -30,7 +30,7 @@
       .eventHandler .beads {
         background-image: url(beads-whole-small.png);
         background-size: 100% auto;
-        background-position: -50px 100px;
+        background-position: bottom;
         background-repeat: no-repeat;
         width: 100%;
         position: absolute;
@@ -357,7 +357,6 @@
             this.style.filter = 'blur('+ randomblur +'px)';
             this.style.zIndex = 0;
             this.querySelector('.orb').style.opacity = randomopacity
-            console.log(randomblur)
             this.querySelector('.orb').style.filter = 'hue-rotate(' + randomtop + 'deg)';
             if (randomleft < 35 && randomtop < 50){
               this.querySelector('img').style.opacity = randomblur
