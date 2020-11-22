@@ -55,11 +55,17 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
       }
+     
+      @media only screen and (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
       .container .left {
         grid-column: 1/2;
         height: 100vh;
         width: 100%;
-      }
+      }       
       
       .container .left img.overlay{
         width: 50vw;
@@ -295,6 +301,54 @@
         transition: opacity .5s linear 0.2s;
         opacity: 1;
         height: 100%;
+      }
+
+      @media only screen and (max-width: 768px) {
+        body {
+          margin: 0;
+        }
+        .container {
+          overflow: scroll;
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          position: relative;
+          display: block;
+        }
+        .container .left {
+          grid-column: 1 / span 2;
+          height: auto;
+          position: fixed;
+          z-index: -1;
+        }
+        .container .left .fixed-display {
+          height: auto;
+          padding: 10px;
+          width: calc(100% - 20px);
+        }
+        .container .left .fixed-display img.mask {
+            width: 100%;
+            object-fit: contain;
+            height: auto;
+        }
+        .container .right {
+          grid-column: 1 / span 2;
+          overflow: unset;
+          margin-top: 40vh;
+        }
+        .container .right .title-page p, .container .right .title-page a {
+          font-size: 8vw;
+        }
+        .container .scroll-gallery figure {
+          padding: 10px;
+          width: calc(100% - 20px);
+          margin: 0;
+          min-height: unset;
+        }
+        .container .scroll-gallery figure img,
+        .container .scroll-gallery figure video {
+          margin-top: 10px;
+        }
       }
 
     </style>
